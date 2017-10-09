@@ -1,16 +1,16 @@
-Router.route('/football-data.events', function() {
-    this.response.setHeader( 'Access-Control-Allow-Origin', '*' );
-
-        if ( this.request.method === "OPTIONS" ) {
-            this.response.setHeader( 'Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept' );
-            this.response.setHeader( 'Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE, OPTIONS' );
-            this.response.end( 'Set OPTIONS.' );
-        } else {
-			console.log("yippikayee");
-            console.log(this.request.body);
-            this.response.statusCode=200;
-            this.response.end();
-            //API.handleRequest( this, 'pizza', this.request.method );
-        }
-    });
-    
+Router.route( "/football-data.events", { where: "server" } )
+.get( function() {
+  // If a GET request is made, return the user's profile.
+  console.log("Football data get was submitted");
+})
+.post( function() {
+    console.log("Football data post was submitted");
+  // If a POST request is made, create the user's profile.
+})
+.put( function() {
+  // If a PUT request is made, either update the user's profile or
+ // create it if it doesn't already exist.
+})
+.delete( function() {
+ // If a DELETE request is made, delete the user's profile.
+});
