@@ -1,0 +1,16 @@
+{
+	"public" : {
+		"env": "Production"
+	},
+	"private": {
+
+		"LOGGLEY_SERVER": "betfield.loggly.com",
+		"LOGGLEY_USER": "betfield",
+		"LOGGLEY_PASS": "B3tfield",
+		"LOGGLEY_TOKEN": "c9b2a00e-c830-403b-b1b6-260c4c3c9c0d",
+		
+		"RESULTS_FEED_API": "http://api.football-data.org/v1/",
+		"RESULTS_FEED_COMPETITION": "competitions/445",  
+		"RESULTS_FEED_KEY": "02f3ec3d0b684f0ca9d53cdbbb22d0bb"
+	}
+}

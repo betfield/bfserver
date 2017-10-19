@@ -10,35 +10,33 @@ import {
   scalar Date               # Define a custom scalar type. 
                             # GraphQL by default supports only "String", "Int", "Float" and "Boolean".
 
-  type Fixture{
-    id: ID!
+  type Fixture {
+    extId: Int
+    competition: Int!
+    matchday: Int!
     homeTeam: Team!
     awayTeam: Team!
-    venue: Venue!
+    result: Result
+    status: String!
     date: Date!             # custom scalar Date
   }
   
-  type Week {
-    id: ID!                 # "!" denotes a required field
-    nr: Int
-    fixtures: [Fixture]!    # "[]" means this is a list of fixtures 
+  type Result {
+    goalsHomeTeam: Int
+    goalsAwayTeam: Int
   }
   
   type Team {
-    id: ID!
     name: String!
-    logoUrl: String!
+    code: String
+    shortName: String
+    logoUrl: String
   }
 
-  type Venue {
-    id: ID!
-    name: String!
-  }
-  
   # This type specifies the entry points into our API
   type Query {
-    weeks: [Week]
-    week(id: ID!): Week 
+    fixtures(comp: Int!): [Fixture]
+    matchdayFixtures(comp: Int!, matchday: Int!): [Fixture]
   }
   `;
   
