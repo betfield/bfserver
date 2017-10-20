@@ -12,7 +12,7 @@ function loadMatchdayData(url, md) {
         }
         });
 
-    return fixtureSet = result.data.fixtures;
+    return fixtureSet = result.data;
 };
 
 function loadInitialFixtures(url) {
@@ -26,7 +26,7 @@ function loadInitialFixtures(url) {
         }});
     
     console.log(url);
-    return result.data.fixtures;
+    return result.data;
 };
 
 function loadTeams(url) {
@@ -38,7 +38,7 @@ function loadTeams(url) {
         "X-Auth-Token": Meteor.settings.private.RESULTS_FEED_KEY
         }});
 
-    return result.data.teams;
+    return result.data;
 };
 
 export { loadInitialFixtures, loadMatchdayData, loadTeams };

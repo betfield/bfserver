@@ -18,7 +18,7 @@ Meteor.startup(function () {
 
 function pollForMatchdayData(url, compId) {
     const currentFixture = getCurrentFixture(compId);
-    const matchdayFixtures = loadMatchdayData(url, currentFixture.matchday);
+    const matchdayFixtures = loadMatchdayData(url, currentFixture.matchday).fixtures;
 
     let counter = 0;
     //Update matchday fixtures that are not finished
@@ -73,7 +73,7 @@ function getCurrentFixture(compId) {
 }
 
 function initLoadTeams(url, compId) {
-    const newTeams = loadTeams(url);
+    const newTeams = loadTeams(url).teams;
 
     console.log("Start loading Teams for competition " + compId + ". Count: " + Teams.find().count());
 
@@ -102,7 +102,7 @@ function initLoadTeams(url, compId) {
 }
 
 function initLoadFixtures(url, compId) {
-    const fixtures = loadInitialFixtures(url);
+    const fixtures = loadInitialFixtures(url).fixtures;
 
     console.log("Start loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
 
