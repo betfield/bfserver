@@ -1,9 +1,8 @@
 import { HTTP } from 'meteor/http';
 
 function loadMatchdayData(url, md) {
-    console.log(url);
     
-    var result = HTTP.call( 'GET', url, 
+    const result = HTTP.call( 'GET', url, 
         {
         headers: {
             "X-Auth-Token": Meteor.settings.private.RESULTS_FEED_KEY
@@ -13,27 +12,14 @@ function loadMatchdayData(url, md) {
         }
         });
 
-    var fixtureSet = result.data;
-
-    //TODO: add handler for persisting matchday data and changes
-
-    /*
-    fixtureSet.forEach((fixture) => {
-    if (publishedKeys[doc._id]) {
-        this.changed(COLLECTION_NAME, doc._id, doc);
-    } else {
-        publishedKeys[doc._id] = true;
-        this.added(COLLECTION_NAME, doc._id, doc);
-    }
-    });
-    */
+    return fixtureSet = result.data.fixtures;
 };
 
 function loadInitialFixtures(url) {
     
     //TODO: add error handlers
 
-    var result = HTTP.call( 'GET', url, 
+    const result = HTTP.call( 'GET', url, 
         {
         headers: {
             "X-Auth-Token": Meteor.settings.private.RESULTS_FEED_KEY
@@ -46,7 +32,7 @@ function loadInitialFixtures(url) {
 function loadTeams(url) {
     console.log(url);
     
-    var result = HTTP.call( 'GET', url,
+    const result = HTTP.call( 'GET', url,
         {
         headers: {
         "X-Auth-Token": Meteor.settings.private.RESULTS_FEED_KEY
