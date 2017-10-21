@@ -18,29 +18,35 @@ Meteor.startup(function () {
 
 function pollForMatchdayData(url, compId) {
     const currentFixture = getCurrentFixture(compId);
-    const matchdayFixtures = loadMatchdayData(url, currentFixture.matchday).fixtures;
+    
+    try {
+        const matchdayFixtures = loadMatchdayData(url, currentFixture.matchday).fixtures;
 
-    let counter = 0;
-    //Update matchday fixtures that are not finished
-    matchdayFixtures.forEach((mdFixture) => {
-        if (mdFixture.status !== "FINISHED") {
-            Fixtures.update({
-                "extId": mdFixture.extId
-            },
-            {
-                matchday: mdFixture.matchday,
-                date: mdFixture.date,
-                homeTeam: mdFixture.homeTeamName,
-                awayTeam: mdFixture.awayTeamName,
-                result: mdFixture.result,
-                status: mdFixture.status
-            });
+        let counter = 0;
+        //Update matchday fixtures that are not finished
+        matchdayFixtures.forEach((mdFixture) => {
+            if (mdFixture.status !== "FINISHED") {
+                Fixtures.update({
+                    "extId": mdFixture.extId
+                },
+                {
+                    matchday: mdFixture.matchday,
+                    date: mdFixture.date,
+                    homeTeam: mdFixture.homeTeamName,
+                    awayTeam: mdFixture.awayTeamName,
+                    result: mdFixture.result,
+                    status: mdFixture.status
+                });
 
-            counter++;
-        }
-    });
+                counter++;
+            }
+        });
 
-    console.log("Matchday fixtures updated: " + counter);
+        console.log("Matchday fixtures updated: " + counter);
+    } catch (err) {
+        console.log("Error loading matcday data: " + err.message);
+        console.log(err.stack);
+    }
 
     //Set new timeout for next run of the function.
     //If there is a match in progress then timeout
