@@ -1,27 +1,20 @@
 import { loadInitialFixtures, loadTeams, loadMatchdayData } from '../imports/api/datafeed';
 
+const compId = Meteor.settings.private.RESULTS_FEED_COMPETITION_ID;
+const fixturesUrl = Meteor.settings.private.RESULTS_FEED_API + "competitions/" + compId + "/fixtures";
+const teamsUrl = Meteor.settings.private.RESULTS_FEED_API + "competitions/" + compId + "/teams";
+
 Meteor.startup(function () {
-    const compId = Meteor.settings.private.RESULTS_FEED_COMPETITION_ID;
-    const fixturesUrl = Meteor.settings.private.RESULTS_FEED_API + "competitions/" + compId + "/fixtures";
-    const teamsUrl = Meteor.settings.private.RESULTS_FEED_API + "competitions/" + compId + "/teams";
-    
-    //Load teams into local database
+    //Start init sequence by loading teams into local database
     initLoadTeams(teamsUrl, compId);
-
-    //Load fixtures into local database
-    initLoadFixtures(fixturesUrl, compId);
-
-    //Start polling the competition for current matchday changes
-    pollForMatchdayData(fixturesUrl, compId);
 
 });
 
 function pollForMatchdayData(url, compId) {
     const currentFixture = getCurrentFixture(compId);
-    
-    try {
-        const matchdayFixtures = loadMatchdayData(url, currentFixture.matchday).fixtures;
+    const matchdayFixtures = loadMatchdayData(url, currentFixture.matchday);
 
+    if (matchdayFixtures !== null) {
         let counter = 0;
         //Update matchday fixtures that are not finished
         matchdayFixtures.forEach((mdFixture) => {
@@ -43,9 +36,6 @@ function pollForMatchdayData(url, compId) {
         });
 
         console.log("Matchday fixtures updated: " + counter);
-    } catch (err) {
-        console.log("Error loading matcday data: " + err.message);
-        console.log(err.stack);
     }
 
     //Set new timeout for next run of the function.
@@ -79,63 +69,83 @@ function getCurrentFixture(compId) {
 }
 
 function initLoadTeams(url, compId) {
-    const newTeams = loadTeams(url).teams;
+    const newTeams = loadTeams(url);
 
-    console.log("Start loading Teams for competition " + compId + ". Count: " + Teams.find().count());
+    //If loading teams succeeded, update these in the local DB
+    if (newTeams !== null) {
+        console.log("Start loading Teams for competition " + compId + ". Count: " + Teams.find().count());
 
-    newTeams.forEach((team) => {
+        newTeams.forEach((team) => {
 
-        Teams.update({
-                competition: compId,
-                name: team.name
-            },
-            {
-                competition: compId,
-                name: team.name,
-                code: team.code,
-                shortName: team.shortName,
-                logoUrl: team.crestUrl
-            },
-            {
-                //Insert new document if team with the name does not exist
-                upsert: true
-            }
-        );
+            Teams.update({
+                    competition: compId,
+                    name: team.name
+                },
+                {
+                    competition: compId,
+                    name: team.name,
+                    code: team.code,
+                    shortName: team.shortName,
+                    logoUrl: team.crestUrl
+                },
+                {
+                    //Insert new document if team with the name does not exist
+                    upsert: true
+                }
+            );
 
-    }); // end of foreach Fixtures
+        }); // end of foreach Fixtures
 
-    console.log("Finished loading Teams for competition " + compId + ". Count: " + Teams.find().count());
+        console.log("Finished loading Teams for competition " + compId + ". Count: " + Teams.find().count());
+
+        //Move to the next function and load fixtures into local database
+        initLoadFixtures(fixturesUrl, compId);
+        
+    } else {
+        //Call the function again after interval, until teams get loaded
+        Meteor.setTimeout(() => {initLoadTeams(url, compId)}, Meteor.settings.private.INIT_POLL_INTERVAL);
+    }
 }
 
 function initLoadFixtures(url, compId) {
-    const fixtures = loadInitialFixtures(url).fixtures;
+    const fixtures = loadInitialFixtures(url);
 
-    console.log("Start loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
+    //If succeeded in loading fixtures, load them into local DB
+    if (fixtures !== null) {
+        console.log("Start loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
 
-    const teams = Teams.find().fetch();
+        const teams = Teams.find().fetch();
 
-    fixtures.forEach((fixture) => {
-        const extId = parseLastStringFromLink(fixture._links.self.href);
+        fixtures.forEach((fixture) => {
+            const extId = parseLastStringFromLink(fixture._links.self.href);
 
-        Fixtures.update({
-                competition: compId,
-                extId: extId
-            },
-            {
-                extId: extId,
-                competition: compId,
-                matchday: fixture.matchday,
-                date: new Date(fixture.date),
-                homeTeam: teams.find((element) => element.name === fixture.homeTeamName),
-                awayTeam: teams.find((element) => element.name === fixture.awayTeamName),
-                result: fixture.result,
-                status: fixture.status
-            },
-            {
-                upsert: true
-            }
-        );
-    }); // end of foreach Fixtures
+            Fixtures.update({
+                    competition: compId,
+                    extId: extId
+                },
+                {
+                    extId: extId,
+                    competition: compId,
+                    matchday: fixture.matchday,
+                    date: new Date(fixture.date),
+                    homeTeam: teams.find((element) => element.name === fixture.homeTeamName),
+                    awayTeam: teams.find((element) => element.name === fixture.awayTeamName),
+                    result: fixture.result,
+                    status: fixture.status
+                },
+                {
+                    upsert: true
+                }
+            );
+        }); // end of foreach Fixtures
 
-    console.log("Finished loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
+        console.log("Finished loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
+
+        //Start polling the competition for current matchday changes
+        pollForMatchdayData(fixturesUrl, compId);
+
+    } else {
+        //Call the function again after interval, until fixtures get loaded
+        Meteor.setTimeout(() => {initLoadFixtures(url, compId)}, Meteor.settings.private.INIT_POLL_INTERVAL);
+    }
 }
