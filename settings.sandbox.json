@@ -3,18 +3,23 @@
 		"env": "Sandbox"
 	},
 	"private": {
-
-		"LOGGLEY_SERVER": "betfield.loggly.com",
-		"LOGGLEY_USER": "betfield",
-		"LOGGLEY_PASS": "B3tfield",
-		"LOGGLEY_TOKEN": "c9b2a00e-c830-403b-b1b6-260c4c3c9c0d",
 		
 		"RESULTS_FEED_API": "http://api.football-data.org/v1/",
-		"RESULTS_FEED_COMPETITION_ID": 445, 
+		"RESULTS_FEED_COMPETITION_ID": 457, 
 		"RESULTS_FEED_KEY": "02f3ec3d0b684f0ca9d53cdbbb22d0bb",
 
 		"MATCHDAY_POLL_INTERVAL": 60000, 	
 		"MATCHDAY_POLL_INTERVAL_LIVE": 10000,
 		"INIT_POLL_INTERVAL": 10000
+	},
+	"loggly": {
+		"token": "c9b2a00e-c830-403b-b1b6-260c4c3c9c0d",
+		"subdomain": "betfield.loggly.com",
+		"auth": {
+			"username": "betfield",
+			"password": "B3tfield"
+		},
+		"tags": ["bfserver"],
+		"json": "true"
 	}
 }

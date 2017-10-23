@@ -1,7 +1,6 @@
 import { HTTP } from 'meteor/http';
 
 function loadMatchdayData(url, md) {
-
     try {
         const result = HTTP.call( 'GET', url, 
             {
@@ -14,8 +13,7 @@ function loadMatchdayData(url, md) {
             });
         return fixtureSet = result.data.fixtures;
     } catch (err) {
-        console.log("Failed to load matchday data: " + err.message);
-        console.log(err.stack);
+        Log.error("Failed to load matchday data: ", err);
         return null;
     }
     
@@ -30,11 +28,9 @@ function loadInitialFixtures(url) {
                 "X-Auth-Token": Meteor.settings.private.RESULTS_FEED_KEY
             }});
         
-        console.log(url);
     return result.data.fixtures;
     } catch (err) {
-        console.log("Failed to load initial fixtures: " + err.message);
-        console.log(err.stack);
+        Log.error("Failed to load initial fixtures: ", err);
         return null;
     }
 };
@@ -50,8 +46,7 @@ function loadTeams(url) {
 
         return result.data.teams;
     } catch (err) {
-        console.log("Failed to load Teams: " + err.message);
-        console.log(err.stack);
+        Log.error("Failed to load Teams: ", err);
         return null;
     }
 };

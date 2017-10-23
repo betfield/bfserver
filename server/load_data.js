@@ -4,11 +4,10 @@ const compId = Meteor.settings.private.RESULTS_FEED_COMPETITION_ID;
 const fixturesUrl = Meteor.settings.private.RESULTS_FEED_API + "competitions/" + compId + "/fixtures";
 const teamsUrl = Meteor.settings.private.RESULTS_FEED_API + "competitions/" + compId + "/teams";
 
-Meteor.startup(function () {
+function init() {
     //Start init sequence by loading teams into local database
     initLoadTeams(teamsUrl, compId);
-
-});
+}
 
 function pollForMatchdayData(url, compId) {
     const currentFixture = getCurrentFixture(compId);
@@ -16,26 +15,35 @@ function pollForMatchdayData(url, compId) {
 
     if (matchdayFixtures !== null) {
         let counter = 0;
+
         //Update matchday fixtures that are not finished
         matchdayFixtures.forEach((mdFixture) => {
             if (mdFixture.status !== "FINISHED") {
+                let extId = parseLastStringFromLink(mdFixture._links.self.href);
+
                 Fixtures.update({
-                    "extId": mdFixture.extId
+                    "extId": extId
                 },
                 {
-                    matchday: mdFixture.matchday,
-                    date: mdFixture.date,
-                    homeTeam: mdFixture.homeTeamName,
-                    awayTeam: mdFixture.awayTeamName,
-                    result: mdFixture.result,
-                    status: mdFixture.status
+                    $set: {
+                        matchday: mdFixture.matchday,
+                        date: new Date(mdFixture.date),
+                        result: mdFixture.result,
+                        status: mdFixture.status
+                    }
                 });
 
                 counter++;
+        
+                //TODO: Implement cache for IN_PLAY fixtures to only update the score when needed
+
+
+                if (mdFixture.status === "IN_PLAY") {
+                    Log.data("In play fixture updated (extId: " + extId + ", homeTeamScore: " + mdFixture.result.goalsHomeTeam + ", awayTeamScore: " + mdFixture.result.goalsAwayTeam + ")", mdFixture);
+                }
             }
         });
-
-        console.log("Matchday fixtures updated: " + counter);
+        Log.info("Matchday fixtures updated: " + counter);
     }
 
     //Set new timeout for next run of the function.
@@ -59,13 +67,25 @@ function getFixtureExternalId(link) {
     if (Number.isInteger(extId)) {
         return extId;
     } else {
-        console.log("Fixture external Id not an integer: " + extId);
+        Log.info("Fixture external Id not an integer: " + extId);
         return 0;
     }
 }
 
 function getCurrentFixture(compId) {
-   return Fixtures.findOne({"competition": compId, "status": {$ne: "FINISHED"}}, {$orderby: {date: 1}});
+    //Return first fixture that has a start date not older than 2 hours ago and not with finished status
+    const date = new Date(new Date().setTime(new Date().getTime()-2*60*60*1000));
+    return Fixtures.findOne({
+            "competition": compId, 
+            "status": {$ne: "FINISHED"}, 
+            "date": {$gte: date}
+        },
+        { 
+            "sort": {
+                "date": 1,
+                "limit": 1
+            }
+        });
 }
 
 function initLoadTeams(url, compId) {
@@ -73,7 +93,7 @@ function initLoadTeams(url, compId) {
 
     //If loading teams succeeded, update these in the local DB
     if (newTeams !== null) {
-        console.log("Start loading Teams for competition " + compId + ". Count: " + Teams.find().count());
+        Log.info("Start loading Teams for competition " + compId + ". Count: " + Teams.find().count());
 
         newTeams.forEach((team) => {
 
@@ -96,13 +116,13 @@ function initLoadTeams(url, compId) {
 
         }); // end of foreach Fixtures
 
-        console.log("Finished loading Teams for competition " + compId + ". Count: " + Teams.find().count());
+        Log.info("Finished loading Teams for competition " + compId + ". Count: " + Teams.find().count());
 
         //Move to the next function and load fixtures into local database
         initLoadFixtures(fixturesUrl, compId);
         
     } else {
-        //Call the function again after interval, until teams get loaded
+        Log.info("No teams found. Waiting to load again..");
         Meteor.setTimeout(() => {initLoadTeams(url, compId)}, Meteor.settings.private.INIT_POLL_INTERVAL);
     }
 }
@@ -112,7 +132,7 @@ function initLoadFixtures(url, compId) {
 
     //If succeeded in loading fixtures, load them into local DB
     if (fixtures !== null) {
-        console.log("Start loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
+        Log.info("Start loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
 
         const teams = Teams.find().fetch();
 
@@ -139,13 +159,15 @@ function initLoadFixtures(url, compId) {
             );
         }); // end of foreach Fixtures
 
-        console.log("Finished loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
+        Log.info("Finished loading Fixtures for competition: " + compId + ". Count: " + Fixtures.find().count());
 
         //Start polling the competition for current matchday changes
         pollForMatchdayData(fixturesUrl, compId);
 
     } else {
-        //Call the function again after interval, until fixtures get loaded
+        Log.info("No fixtures found. Waiting to load again..");
         Meteor.setTimeout(() => {initLoadFixtures(url, compId)}, Meteor.settings.private.INIT_POLL_INTERVAL);
     }
 }
+
+export { init }
