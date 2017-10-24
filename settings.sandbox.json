@@ -3,10 +3,9 @@
 		"env": "Sandbox"
 	},
 	"private": {
-		
-		"RESULTS_FEED_API": "http://api.football-data.org/v1/",
-		"RESULTS_FEED_COMPETITION_ID": 457, 
-		"RESULTS_FEED_KEY": "02f3ec3d0b684f0ca9d53cdbbb22d0bb",
+
+		"SPORTMONKS_API": "https://soccer.sportmonks.com/api/",
+		"SPORTMONKS_API_TOKEN": "fVOC8UhcpFDSVFyNmAIjbbt2buc86l128ovGMVAJZwgHVtnwpa9XjZJ3GodE",
 
 		"MATCHDAY_POLL_INTERVAL": 60000, 	
 		"MATCHDAY_POLL_INTERVAL_LIVE": 10000,

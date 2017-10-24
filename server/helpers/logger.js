@@ -20,13 +20,15 @@ const logger = {
     },
     error: (message, err) => {
         try {
-            console.log("[error]: " + message + ": " + err.message);
-            console.log("[error]: " + err.stack);
-            Logger.error({
-                "error": err.message,
-                "trace": err.stack
-            });
-            Logger.trace(err.stack);
+            console.log("[error]: " + message);
+            
+            if (err && err !== null && err !== undefined) {
+                console.log("[error]: " + err.stack);
+                Logger.error({
+                    "error": err.message,
+                    "trace": err.stack
+                });
+            }
         } catch (err) {
             console.log("Error sending info to Loggly: " + err.message);
             console.log(err.stack);
