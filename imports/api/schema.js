@@ -11,8 +11,9 @@ import {
                             # GraphQL by default supports only "String", "Int", "Float" and "Boolean".
 
   type Fixture {
-    extId: Int
-    competition: Int!
+    id: Int!
+    league_id: Int!
+    season_id: Int!
     matchday: Int!
     homeTeam: Team!
     awayTeam: Team!
@@ -27,16 +28,15 @@ import {
   }
   
   type Team {
+    id: Int!
     name: String!
-    code: String
-    shortName: String
     logoUrl: String
   }
 
   # This type specifies the entry points into our API
   type Query {
-    fixtures(comp: Int!): [Fixture]
-    matchdayFixtures(comp: Int!, matchday: Int!): [Fixture]
+    fixtures(season: Int!): [Fixture]
+    matchdayFixtures(season: Int!, matchday: Int!): [Fixture]
   }
   `;
   

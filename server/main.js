@@ -26,18 +26,6 @@ Meteor.startup(() => {
 
   Log.info("Apollo server started");
 
-  /*
-  loadSeasonMatchdays(7953).then( result => {
-    //console.log(result);
-  });
-
-  
-*/
-/*
-  loadSeasonTeams(7953).then( result => {
-    //console.log(result);
-  });
-*/
    //Start init sequence
   Log.info("Starting initialisation sequence");
   init();

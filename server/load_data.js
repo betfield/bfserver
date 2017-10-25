@@ -5,7 +5,7 @@ function init() {
 
     loadSeasonFixtures(season).then( result => {
         let md = 0;
-
+        //TODO: check paging as manual says only 100 fixtures per page
         try {
             const league = result.data.league.data;
             const rounds = result.data.rounds.data;
