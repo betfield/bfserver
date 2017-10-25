@@ -7,18 +7,11 @@
 
 */
 
-function loadSeasonMatchdays(season) {
-    return Sportmonks.get("v2.0/rounds/season/{id}", {
-        "id": season
-    }).catch( err => {
-        Log.error("Failed to load matchdays for season: " + season, err);
-    });
-};
-
 function loadMatchdayData(md) {
     return Sportmonks.get("v2.0/rounds/{id}", {
         "id": md, 
-        "league": true, 
+        "league": true,
+        "season": true, 
         "fixtures.localTeam": true, 
         "fixtures.visitorTeam": true
     }).catch( err => {
@@ -38,13 +31,4 @@ function loadSeasonFixtures(season) {
     });
 };
 
-function loadSeasonTeams(season) {
-    return Sportmonks.get("v2.0/teams/season/{id}", {
-        "id": season, 
-        "squad.player": true
-    }).catch( err => {
-        Log.error("Failed to load teams for season: " + season, err);
-    });
-};
-
-export { loadSeasonMatchdays, loadSeasonFixtures, loadMatchdayData, loadSeasonTeams };
+export { loadSeasonFixtures, loadMatchdayData };
