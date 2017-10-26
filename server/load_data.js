@@ -1,7 +1,8 @@
 import { loadSeasonFixtures, loadMatchdayData } from '../imports/api/datafeed';
 
 function init() {
-    const season = 7953;
+    //const season = 7953; //Scottish Premiership
+    const season = 6361; //Danish Superligaen
 
     loadSeasonFixtures(season).then( result => {
         let md = 0;
