@@ -14,7 +14,8 @@ import {
     id: Int!
     league_id: Int!
     season_id: Int!
-    matchday: Int!
+    matchday_id: Int!
+    matchday_name: String
     homeTeam: Team!
     awayTeam: Team!
     result: Result
@@ -37,6 +38,7 @@ import {
   type Query {
     fixtures(season: Int!): [Fixture]
     matchdayFixtures(season: Int!, matchday: Int!): [Fixture]
+    currentMatchdayfixtures(season: Int!): [Fixture]
   }
   `;
   

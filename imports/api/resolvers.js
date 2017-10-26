@@ -24,6 +24,17 @@ export const resolvers = {
                 Log.error("Failed to load Query (matchdayFixtures)", err);
                 return null;
             }
+        },
+        currentMatchdayfixtures: (_, { season }) => {
+            Log.info("Loading Query (currentMatchdayFixtures) for season: " + season);
+            
+            try {
+                const fixtures = Fixtures.find({ "fixture.round_id": Seasons.findOne({"id": season}).current_round_id }).fetch();
+                return adjustFixtureValues(fixtures);
+            } catch (err) {
+                Log.error("Failed to load Query (currentMatchdayFixtures)", err);
+                return null;
+            }
         }
     },
 };
@@ -38,7 +49,8 @@ function adjustFixtureValues(fixtures) {
             "id": e.fixture.id,
             "league_id": e.fixture.league_id,
             "season_id": e.fixture.season_id,
-            "matchday": e.fixture.round_id,
+            "matchday_id": e.fixture.round_id,
+            "matchday_name": e.fixture.round_name,
             "homeTeam": {
                 "id": e.fixture.localTeam.data.id,
                 "name": e.fixture.localTeam.data.name,

@@ -5,29 +5,23 @@ function init() {
 
     loadSeasonFixtures(season).then( result => {
         let md = 0;
-        //TODO: check paging as manual says only 100 fixtures per page
         try {
             const league = result.data.league.data;
             const rounds = result.data.rounds.data;
+            
+            //Update season data in local db
+            updateSeason(league);
 
             //Get current matchday (round)
+            //TODO: Might need a better way to do this as seems that API 
+            //provided current round id not accurate when fixtures postponed
             md = league.current_round_id;
 
             rounds.forEach( round => {
-                let fixtures = round.fixtures.data;
+                const fixtures = round.fixtures.data;
 
                 fixtures.forEach( fixture => {
-
-                    Fixtures.update({
-                        "fixture.id": fixture.id
-                    },
-                    {
-                        fixture
-                    },
-                    {
-                        upsert: true
-                    });   
-
+                    updateMatchdayFixtures(fixture, round.name)
                 });
                 
             });
@@ -48,20 +42,16 @@ function pollForMatchdayData(season, md) {
         let interval = Meteor.settings.private.MATCHDAY_POLL_INTERVAL;
 
         try {
+            //Update season data in local db
+            updateSeason(result.data.league.data);
+
             const fixtures = result.data.fixtures.data;
+            const matchday = result.data.name;
             let status = "";
 
             fixtures.forEach( fixture => {
 
-                Fixtures.update({
-                    "fixture.id": fixture.id
-                },
-                {
-                    fixture
-                },
-                {
-                    upsert: true
-                });
+                updateMatchdayFixtures(fixture, matchday)
                 
                 status = fixture.time.status;
 
@@ -89,6 +79,37 @@ function pollForMatchdayData(season, md) {
         //Call function again after polling interval
         Meteor.setTimeout(() => { pollForMatchdayData(season, md) }, interval);
     });
+}
+
+function updateMatchdayFixtures(fixture, matchday) {
+    //Add matchday name as part of fixture object
+    fixture.round_name = matchday;
+    
+    Fixtures.update({
+        "fixture.id": fixture.id
+    },
+    {
+        fixture
+    },
+    {
+        upsert: true
+    });   
+
+}
+
+function updateSeason(season) {
+    Seasons.update({
+        "id": season.current_season_id
+    },
+    {
+        "id": season.current_season_id,
+        "league_id": season.id,
+        "league_name": season.name,
+        "current_round_id": season.current_round_id
+    },
+    {
+        upsert: true
+    });   
 }
 
 export { init }
