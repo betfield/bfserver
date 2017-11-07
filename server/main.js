@@ -9,6 +9,7 @@ import { logger } from './helpers/logger';
 
 import { loadSeasonMatchdays, loadMatchdayData, loadSeasonFixtures, loadSeasonTeams } from '../imports/api/datafeed';
 import { SportmonksApi } from '../imports/api/sportmonks';
+import cors from 'cors';
 
 Meteor.startup(() => {
   //Define logger object
@@ -22,6 +23,8 @@ Meteor.startup(() => {
   //Start Apollo server 
   createApolloServer({
     schema,
+  }, {
+    configServer: graphQLServer => graphQLServer.use(cors()),
   });
 
   Log.info("Apollo server started");

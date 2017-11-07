@@ -36,6 +36,7 @@ import {
 
   # This type specifies the entry points into our API
   type Query {
+    exampleQuery: Fixture
     fixtures(season: Int!): [Fixture]
     matchdayFixtures(season: Int!, matchday: Int!): [Fixture]
     currentMatchdayfixtures(season: Int!): [Fixture]

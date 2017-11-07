@@ -3,6 +3,18 @@ import GraphQLDate from 'graphql-date';
 export const resolvers = {
     Date: GraphQLDate,
     Query: {
+        exampleQuery: (_) => {
+            Log.info("Example Query: ");
+
+            try {
+                const fixtures = Fixtures.find({ "_id": "ZhBQ9r7JbNqFJbyJW" }).fetch();
+                Log.data(adjustFixtureValues(fixtures)[0]);
+                return adjustFixtureValues(fixtures)[0];
+            } catch (err) {
+                Log.error("Failed to load Example Query", err);
+                return null;
+            }
+        },
         fixtures: (_, { season }) => {
             Log.info("Loading Query (fixtures) for season: " + season);
 
