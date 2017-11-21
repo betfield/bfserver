@@ -3,18 +3,6 @@ import GraphQLDate from 'graphql-date';
 export const resolvers = {
     Date: GraphQLDate,
     Query: {
-        exampleQuery: (_) => {
-            Log.info("Example Query: ");
-
-            try {
-                const fixtures = Fixtures.find({ "_id": "ZhBQ9r7JbNqFJbyJW" }).fetch();
-                Log.data(adjustFixtureValues(fixtures)[0]);
-                return adjustFixtureValues(fixtures)[0];
-            } catch (err) {
-                Log.error("Failed to load Example Query", err);
-                return null;
-            }
-        },
         fixtures: (_, { season }) => {
             Log.info("Loading Query (fixtures) for season: " + season);
 
@@ -73,15 +61,61 @@ function adjustFixtureValues(fixtures) {
                 "name": e.fixture.visitorTeam.data.name,
                 "logoUrl": e.fixture.visitorTeam.data.logo_path,
             },
+            "venue": {
+                "id": e.fixture.venue.data.id,
+                "name": e.fixture.venue.data.name,
+                "city": e.fixture.venue.data.city,
+                "capacity": e.fixture.venue.data.capacity,
+                "imgUrl": e.fixture.venue.data.image_path
+            },
+            "referee": e.fixture.referee.data.fullname,
             "status": e.fixture.time.status,
             "date": new Date(e.fixture.time.starting_at.date_time + " " + e.fixture.time.starting_at.timezone)
         }
     
-        //If game has not been started then set result as empty
+        //Set result and stats, unless game has not been started yet (or has been postponed)
         if (e.fixture.time.status !== "NS" && e.fixture.time.status !== "POSTP") {
             fixture.result = {
                 "goalsHomeTeam": e.fixture.scores.localteam_score,
                 "goalsAwayTeam": e.fixture.scores.visitorteam_score
+            };
+
+            //Get stats array
+            const stats = e.fixture.stats.data;
+
+            //Check if stats array has data (at least 2 elements in array) and assign to fixtures object
+            if (stats !== undefined && stats !== null && stats.length > 1 ) {
+                fixture.statsHomeTeam = {
+                    "shots": {
+                        "total": stats[0].shots.total,
+                        "ongoal": stats[0].shots.ongoal,
+                        "offgoal": stats[0].shots.offgoal,
+                        "blocked": stats[0].shots.blocked
+                    },
+                    "fouls": stats[0].fouls,
+                    "corners": stats[0].corners,
+                    "offsides": stats[0].offsides,
+                    "possessiontime": stats[0].possessiontime,
+                    "yellowcards": stats[0].yellowcards,
+                    "redcards": stats[0].redcards,
+                    "saves": stats[0].saves
+                };
+
+                fixture.statsAwayTeam = {
+                    "shots": {
+                        "total": stats[1].shots.total,
+                        "ongoal": stats[1].shots.ongoal,
+                        "offgoal": stats[1].shots.offgoal,
+                        "blocked": stats[1].shots.blocked
+                    },
+                    "fouls": stats[1].fouls,
+                    "corners": stats[1].corners,
+                    "offsides": stats[1].offsides,
+                    "possessiontime": stats[1].possessiontime,
+                    "yellowcards": stats[1].yellowcards,
+                    "redcards": stats[1].redcards,
+                    "saves": stats[1].saves
+                }
             }
         }
 

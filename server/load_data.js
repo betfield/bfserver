@@ -7,7 +7,10 @@ function init() {
     loadSeasonFixtures(season).then( result => {
         let md = 0;
         try {
+            //Extract league object from result for later use
             const league = result.data.league.data;
+            
+            //Extract rounds object from result for later use
             const rounds = result.data.rounds.data;
             
             //Update season data in local db
@@ -22,6 +25,7 @@ function init() {
                 const fixtures = round.fixtures.data;
 
                 fixtures.forEach( fixture => {
+                    //Update fixture data in local db
                     updateMatchdayFixtures(fixture, round.name)
                 });
                 
@@ -86,6 +90,7 @@ function updateMatchdayFixtures(fixture, matchday) {
     //Add matchday name as part of fixture object
     fixture.round_name = matchday;
     
+    //Update fixture in local db or add new if doesn't exist
     Fixtures.update({
         "fixture.id": fixture.id
     },

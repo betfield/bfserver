@@ -1,0 +1,800 @@
+name: "3Way Result",
+bookmaker: {
+    data: [
+        id: 97,
+        name: "Unibet",
+        odds: {
+            data: [
+                {
+                    label: "1",
+                    value: "5.10",
+                    winning: null,
+                    handicap: null,
+                    total: null,
+                    last_update: {
+                        date: "2017-10-31 19:11:45.000000",
+                        timezone_type: 3,
+                        timezone: "UTC"
+                    }
+                },
+                {
+                    label: "2",
+                    value: "1.66",
+                    winning: null,
+                    handicap: null,
+                    total: null,
+                    last_update: {
+                        date: "2017-10-31 19:11:45.000000",
+                        timezone_type: 3,
+                        timezone: "UTC"
+                    }
+                },
+                {
+                    label: "X",
+                    value: "3.65",
+                    winning: null,
+                    handicap: null,
+                    total: null,
+                    last_update: {
+                        date: "2017-10-31 19:11:45.000000",
+                        timezone_type: 3,
+                        timezone: "UTC"
+                    }
+                }
+            ]
+        }
+    ]
+}   
+
+name: "Home Team Score a Goal",
+bookmaker: {
+    data: [
+        {
+            id: 2,
+            name: "bet365",
+            odds: {
+                data: [
+                    {
+                        label: "No",
+                        value: "2.10",
+                        winning: true,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 18:51:01.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Away Team Score a Goal",
+bookmaker: {
+    data: [
+        {
+            id: 2,
+            name: "bet365",
+            odds: {
+                data: [
+                    {
+                        label: "Yes",
+                        value: "1.18",
+                        winning: true,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 18:51:02.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "No",
+                        value: "4.50",
+                        winning: false,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 18:51:02.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Corners Over Under",
+bookmaker: {
+    data: [
+        {
+            id: 2,
+            name: "bet365",
+            odds: {
+                data: [
+                    {
+                        label: "Over",
+                        value: "1.83",
+                        winning: null,
+                        handicap: null,
+                        total: "10.5",
+                        last_update: {
+                            date: "2017-10-31 18:51:02.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Under",
+                        value: "1.83",
+                        winning: null,
+                        handicap: null,
+                        total: "10.5",
+                        last_update: {
+                            date: "2017-10-31 18:51:02.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Home/Away",
+bookmaker: {
+    data: [
+        {
+            id: 9,
+            name: "Bet Fred",
+            odds: {
+                data: [
+                    {
+                        label: "1",
+                        value: "3.75",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:11:45.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2",
+                        value: "1.25",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:11:45.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Over/Under",
+bookmaker: {
+    data: [
+        {
+            id: 1,
+            name: "10Bet",
+            odds: {
+                data: [
+                    {
+                        label: "Under",
+                        value: "2.34",
+                        winning: false,
+                        handicap: null,
+                        total: "2.0",
+                        last_update: {
+                            date: "2017-10-31 19:11:47.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Over",
+                        value: "1.57",
+                        winning: true,
+                        handicap: null,
+                        total: "2.0",
+                        last_update: {
+                            date: "2017-10-31 19:11:48.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Under",
+                        value: "1.98",
+                        winning: false,
+                        handicap: null,
+                        total: "2.25",
+                        last_update: {
+                            date: "2017-10-31 19:11:48.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Over",
+                        value: "1.83",
+                        winning: true,
+                        handicap: null,
+                        total: "2.25",
+                        last_update: {
+                            date: "2017-10-31 19:11:48.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Under",
+                        value: "1.69",
+                        winning: false,
+                        handicap: null,
+                        total: "2.5",
+                        last_update: {
+                            date: "2017-10-31 19:11:48.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Over",
+                        value: "2.12",
+                        winning: true,
+                        handicap: null,
+                        total: "2.5",
+                        last_update: {
+                            date: "2017-10-31 19:11:48.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Asian Handicap",
+bookmaker: {
+    data: [
+        {
+            id: 1,
+            name: "10Bet",
+            odds: {
+                data: [
+                    {
+                        label: "1",
+                        value: "2.20",
+                        winning: null,
+                        handicap: "+0.5",
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:03.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2",
+                        value: "1.67",
+                        winning: null,
+                        handicap: "+0.5",
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:03.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "1",
+                        value: "1.89",
+                        winning: null,
+                        handicap: "+0.75",
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:03.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2",
+                        value: "1.95",
+                        winning: null,
+                        handicap: "+0.75",
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:03.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "1",
+                        value: "1.60",
+                        winning: null,
+                        handicap: "+1.0",
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:03.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2",
+                        value: "2.33",
+                        winning: null,
+                        handicap: "+1.0",
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:03.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "HT/FT Double"
+bookmaker: {
+    data: [
+        {
+            id: 15,
+            name: "Betfair",
+            odds: {
+                data: [
+                    {
+                        label: "Draw/Draw",
+                        value: "6.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Draw/Kilmarnock",
+                        value: "12.50",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Kilmarnock/Draw",
+                        value: "23.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Kilmarnock/Kilmarnock",
+                        value: "11.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Draw/Hibernian",
+                        value: "4.90",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Hibernian/Draw",
+                        value: "21.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Hibernian/Hibernian",
+                        value: "2.84",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Hibernian/Kilmarnock",
+                        value: "75.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Kilmarnock/Hibernian",
+                        value: "32.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:30.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Both Teams to Score",
+bookmaker: {
+    data: [
+    {
+        id: 3,
+            name: "188Bet",
+            odds: {
+                data: [
+                    {
+                        label: "No",
+                        value: "1.72",
+                        winning: true,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:35.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "Yes",
+                        value: "2.08",
+                        winning: false,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:35.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Double Chance",
+bookmaker: {
+    data: [
+        {
+            id: 9,
+            name: "Bet Fred",
+            odds: {
+                data: [
+                    {
+                        label: "1X",
+                        value: "2.05",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:37.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "X2",
+                        value: "1.17",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:38.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "12",
+                        value: "1.29",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:38.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Team To Score First",
+bookmaker: {
+    data: [
+        {
+            id: 9,
+            name: "Bet Fred",
+            odds: {
+                data: [
+                    {
+                        label: "1",
+                        value: "2.90",
+                        winning: false,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:40.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2",
+                        value: "1.53",
+                        winning: true,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:40.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "X",
+                        value: "9.00",
+                        winning: false,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:40.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Team To Score Last",
+bookmaker: {
+    data: [
+        {
+            id: 1,
+            name: "10Bet",
+            odds: {
+                data: [
+                    {
+                        label: "1",
+                        value: "2.85",
+                        winning: false,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:43.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                        {
+                        label: "2",
+                        value: "1.54",
+                        winning: true,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:43.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "X",
+                        value: "8.25",
+                        winning: false,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:43.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "Handicap Result",
+bookmaker: {
+    data: [
+        {
+            id: 9,
+            name: "Bet Fred",
+            odds: {
+                data: [
+                    {
+                        label: "1 : -1.0",
+                        value: "12.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2 : +1.0",
+                        value: "1.17",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "1 : +1.0",
+                        value: "2.15",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2 : -1.0",
+                        value: "3.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "1 : +2.0",
+                        value: "1.33",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "2 : -2.0",
+                        value: "6.50",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "X : -1.0",
+                        value: "6.50",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "X : +1.0",
+                        value: "3.25",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    },
+                    {
+                        label: "X : +2.0",
+                        value: "5.00",
+                        winning: null,
+                        handicap: null,
+                        total: null,
+                        last_update: {
+                            date: "2017-10-31 19:12:46.000000",
+                            timezone_type: 3,
+                            timezone: "UTC"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+
+name: "3Way Result 1st Half"
+
+name: "Over/Under 1st Half"
+
+name: "Over/Under 2nd Half"
+
+name: "3Way Result 2nd Half"
+

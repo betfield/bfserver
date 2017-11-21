@@ -13,7 +13,10 @@ function loadMatchdayData(md) {
         "league": true,
         "season": true, 
         "fixtures.localTeam": true, 
-        "fixtures.visitorTeam": true
+        "fixtures.visitorTeam": true,
+        "fixtures.venue": true,
+        "fixtures.referee": true,
+        "fixtures.stats": true
     }).catch( err => {
         Log.error("Failed to load data for matchday: " + md, err);
     });
@@ -25,6 +28,8 @@ function loadSeasonFixtures(season) {
         "league": true, 
         "rounds.fixtures.localTeam": true,
         "rounds.fixtures.visitorTeam": true,
+        "rounds.fixtures.venue": true,
+        "rounds.fixtures.referee": true,
         "rounds.fixtures.stats": true
     }).catch( err => {
         Log.error("Failed to load fixtures for season: " + season, err);
