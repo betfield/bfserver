@@ -41,7 +41,7 @@ export const resolvers = {
 
 function adjustFixtureValues(fixtures) {
     let res = [];
-    
+    console.log("Fixture: " + fixtures[0]);    
     fixtures.forEach( e => {
         let result = null;
 
@@ -68,7 +68,6 @@ function adjustFixtureValues(fixtures) {
                 "capacity": e.fixture.venue.data.capacity,
                 "imgUrl": e.fixture.venue.data.image_path
             },
-            "referee": e.fixture.referee.data.fullname,
             "status": e.fixture.time.status,
             "date": new Date(e.fixture.time.starting_at.date_time + " " + e.fixture.time.starting_at.timezone)
         }
@@ -117,6 +116,14 @@ function adjustFixtureValues(fixtures) {
                     "saves": stats[1].saves
                 }
             }
+        }
+
+        let referee = e.fixture.referee;
+
+        if (referee.data !== null && referee.data !== undefined ) {
+            fixture.referee = referee.data.fullname;
+        } else {
+            fixture.referee = null;
         }
 
         res.push(fixture);
