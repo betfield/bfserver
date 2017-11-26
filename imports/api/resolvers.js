@@ -120,7 +120,7 @@ function adjustFixtureValues(fixtures) {
 
         let referee = e.fixture.referee;
 
-        if (referee.data !== null && referee.data !== undefined ) {
+        if (referee !== null && referee !== undefined ) {
             fixture.referee = referee.data.fullname;
         } else {
             fixture.referee = null;
