@@ -41,7 +41,7 @@ export const resolvers = {
 
 function adjustFixtureValues(fixtures) {
     let res = [];
-    console.log("Fixture: " + fixtures[0]);    
+    
     fixtures.forEach( e => {
         let result = null;
 
