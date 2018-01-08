@@ -35,6 +35,28 @@ export const resolvers = {
                 Log.error("Failed to load Query (currentMatchdayFixtures)", err);
                 return null;
             }
+        },
+        seasonMatchdays: (_, { season }) => {
+            Log.info("Loading Query (seasonMatchdays) for season: " + season);
+            
+            try {
+                const fixtures = Fixtures.find({ "fixture.season_id": season }, {fields: {"fixture.round_name": 1}}).fetch();
+                
+                let uniqueMatchdays = [];
+
+                fixtures.forEach(f => {
+                    if (uniqueMatchdays.length > 0) {
+                        uniqueMatchdays.indexOf(f.fixture.round_name) === -1 ? uniqueMatchdays.push(f.fixture.round_name) : {}
+                    } else {
+                        uniqueMatchdays.push(f.fixture.round_name);
+                    }
+                });
+
+                return uniqueMatchdays;
+            } catch (err) {
+                Log.error("Failed to load Query (seasonMatchdays)", err);
+                return null;
+            }
         }
     },
 };

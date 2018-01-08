@@ -69,6 +69,7 @@ import {
     fixtures(season: Int!): [Fixture]
     matchdayFixtures(season: Int!, matchday: Int!): [Fixture]
     currentMatchdayfixtures(season: Int!): [Fixture]
+    seasonMatchdays(season: Int!): [Int]
   }
   `;
   
